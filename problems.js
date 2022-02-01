@@ -12,3 +12,17 @@ var climbStairs = function(n) {
 //     if ( n < 0) return 0;
 //     return memo[n] = climbStairs(n - 1, memo) + climbStairs(n - 2, memo);
 // };
+
+
+// contains duplicate
+var containsDuplicate = function(nums) {
+    let setter = new Set();
+    for (let i = 0; i < nums.length; i++) {
+        if (!setter.has(nums[i])) {
+            setter.add(nums[i])
+        } else {
+            return true;
+        }
+    }
+    return false;
+};
