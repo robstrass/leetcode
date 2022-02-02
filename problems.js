@@ -26,3 +26,18 @@ var containsDuplicate = function(nums) {
     }
     return false;
 };
+
+// countBits
+var countBits = function(n) {
+    const arr = [];
+    for (let i = 0; i <= n; i++) {
+        let count = 0;
+        let bin = i.toString(2);
+        for (let j = 0; j < bin.length; j++) {
+            if (bin[j] == 1) count++
+        }
+        arr.push(count);
+        count = 0;
+    }
+    return arr;
+};
