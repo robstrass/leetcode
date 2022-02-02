@@ -52,3 +52,26 @@ var middleNode = function(head) {
     }
     return slow;
 };
+
+
+// reverse linkedlist
+var reverseList = function(head) {
+    let prev = null;
+    let curr = head;
+    let next = curr.next;
+
+    while (curr) {
+        next = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
+//     let prev = null;
+//     let curr = head;
+
+//     while (curr) {
+//         [curr.next, prev, curr] = [prev, curr, curr.next];
+//     }
+//     return prev;
+};
