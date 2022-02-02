@@ -56,6 +56,8 @@ var middleNode = function(head) {
 
 // reverse linkedlist
 var reverseList = function(head) {
+    if (head === null) return head
+
     let prev = null;
     let curr = head;
     let next = curr.next;
