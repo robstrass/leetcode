@@ -113,3 +113,20 @@ var findDuplicates = function(nums) {
     }
     return sol;
 };
+
+// product of array except self
+var productExceptSelf = function(nums) {
+    let sol = [];
+    sol[0] = 1;
+    for (let i = 1; i < nums.length; i++) {
+        sol[i] = sol[i - 1] * nums[i - 1];
+    };
+
+    let right = 1;
+    for (let i = nums.length - 1; i >= 0; i--) {
+        sol[i] *= right;
+        right *= nums[i];
+    }
+
+    return sol;
+};
