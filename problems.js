@@ -77,3 +77,10 @@ var reverseList = function(head) {
 //     }
 //     return prev;
 };
+
+
+// contains duplicate
+var containsDuplicate = function(nums) {
+    const setter = new Set(nums);
+    return setter.size !== nums.length;
+};
