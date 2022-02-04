@@ -84,3 +84,17 @@ var containsDuplicate = function(nums) {
     const setter = new Set(nums);
     return setter.size !== nums.length;
 };
+
+// find duplicate
+var findDuplicate = function(nums) {
+    const sorted = nums.sort((a, b) => a - b);
+    let curr;
+    let next;
+    for (let i = 0; i < sorted.length; i++) {
+        curr = sorted[i];
+        next = sorted[i + 1];
+        if (curr === next) {
+            return curr;
+        }
+    }
+};
