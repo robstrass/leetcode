@@ -98,3 +98,18 @@ var findDuplicate = function(nums) {
         }
     }
 };
+
+// find duplicates
+var findDuplicates = function(nums) {
+    const setter = new Set();
+    const sol = [];
+
+    for (let i = 0; i < nums.length; i++) {
+        if (!setter.has(nums[i])) {
+            setter.add(nums[i])
+        } else {
+            sol.push(nums[i])
+        }
+    }
+    return sol;
+};
