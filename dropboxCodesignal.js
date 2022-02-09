@@ -102,9 +102,9 @@ let queries3 = [
 
 let queries4 = [
     ["APPEND", "!"],                 //| "" -> "!"
-    ["DELETE"]                       //| "!" -> "!"
+    ["DELETE"],                       //| "!" -> "!"
     ["MOVE", "0"],                   //| moves the cursor before the first symbol
-    ["DELETE"]                       //| "!" -> ""
+    ["DELETE"],                       //| "!" -> ""
     ["DELETE"]                       //| "" -> ""
 ]
 
@@ -122,8 +122,26 @@ let queries5 = [
 // returns: [ "Hello cruel world!",
 //            "Hello cruel world!",
 //            "Hello, world!" ]
+let queries6 = [
+    ["APPEND", "Hello, world!"],       //| "" -> "Hello, world!"
+    ["SELECT", "5", "12"],             //| selects ", world"
+    ["COPY"],                           //| copies ", world"
+    ["MOVE", "12"],                    //| moves the cursor after "d"
+    ["PASTE"],                         //| "Hello, world!" -> "Hello, world, world!"
+    ["PASTE"]                          //| "Hello, world, world!" -> "Hello, world, world, world!"
+]
+
+// returns: [ "Hello, world!",
+//            "Hello, world!",
+//            "Hello, world!",
+//            "Hello, world!",
+//            "Hello, world, world!",
+//            "Hello, world, world, world!" ]
 function textEditor(arr) {
     let lastItem = '';
+    let beforeSelect = '';
+    let selectedItem = '';
+    let afterPaste = '';
     let position = 0;
     let sol = [];
 
@@ -134,19 +152,17 @@ function textEditor(arr) {
         console.log('position', position)
         if (subArr[0] === 'APPEND') {
             console.log('append', i);
-            if (position === 0) {
-                lastItem = lastItem + subArr[1];
-                sol.push(lastItem);
-            } else {
-                const lastItemArr = lastItem.split('');
-                lastItemArr.splice(position, 0, subArr[1]);
-                lastItem = lastItemArr.join('');
-                sol.push(lastItem);
-            }
+            const lastItemArr = lastItem.split('');
+            lastItemArr.splice(position, 0, subArr[1]);
+            lastItem = lastItemArr.join('');
+            sol.push(lastItem);
+            position += lastItem.length;
         }
         if (subArr[0] === 'MOVE') {
             console.log('move', i)
-            position += subArr[1];
+            position = +subArr[1];
+            console.log('lastItemmmmm in move', lastItem)
+            lastItem = beforeSelect;
             sol.push(lastItem);
         }
         if (subArr[0] === 'DELETE') {
@@ -160,10 +176,25 @@ function textEditor(arr) {
         if (subArr[0] === 'SELECT') {
             console.log('select', i)
             sol.push(lastItem);
+            beforeSelect = lastItem;
             const lastItemArr = lastItem.split('');
-            lastItemArr.splice(subArr[1], subArr[2] - subArr[1]);
-            position = subArr[1];
+            selectedItem = lastItemArr.splice(subArr[1], subArr[2] - subArr[1]).join('');
+            position = +subArr[1];
             lastItem = lastItemArr.join('');
+        }
+        if (subArr[0] === 'COPY') {
+            console.log('copy', i)
+            sol.push(beforeSelect);
+        }
+        if (subArr[0] === 'PASTE') {
+            console.log('paste', i)
+            console.log('beforeSelect paste', beforeSelect)
+            const lastItemArr = afterPaste ? afterPaste.split('') : beforeSelect.split('');
+            console.log('selectedItem', selectedItem)
+            lastItemArr.splice(position, 0, selectedItem);
+            lastItem = lastItemArr.join('');
+            afterPaste = lastItem;
+            sol.push(lastItem);
         }
     }
 
@@ -174,4 +205,5 @@ function textEditor(arr) {
 // console.log(textEditor(queries2));
 // console.log(textEditor(queries3));
 // console.log(textEditor(queries4));
-console.log(textEditor(queries5));
+// console.log(textEditor(queries5));
+console.log(textEditor(queries6));
