@@ -87,6 +87,18 @@ let queries2 = [
 // returns: [ "Hey you",
 //            "Hey you",
 //            "Hey, you" ]
+
+let queries3 = [
+    ["APPEND", "Hello! world!"],      //| "" -> "Hello! world!"
+    ["MOVE", "5"],                   //| moves the cursor before the first "!"
+    ["DELETE"],                      //| "Hello! world!" -> "Hello world!"
+    ["APPEND", ","]                  //| "Hello world!" -> "Hello, world!"
+]
+
+// returns: [ "Hello! world!",
+//            "Hello! world!",
+//            "Hello world!",
+//            "Hello, world!" ]
 function textEditor(arr) {
     let lastItem = '';
     let position = 0;
@@ -107,6 +119,11 @@ function textEditor(arr) {
         } else if (subArr[0] === 'MOVE') {
             position = subArr[1];
             sol.push(lastItem);
+        } else if (subArr[0] === 'DELETE') {
+            const lastItemArr = lastItem.split('');
+            lastItemArr.splice(position, 1);
+            lastItem = lastItemArr.join('');
+            sol.push(lastItem);
         }
     }
 
@@ -115,3 +132,4 @@ function textEditor(arr) {
 
 console.log(textEditor(queries));
 console.log(textEditor(queries2));
+console.log(textEditor(queries3));
