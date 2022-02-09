@@ -99,6 +99,29 @@ let queries3 = [
 //            "Hello! world!",
 //            "Hello world!",
 //            "Hello, world!" ]
+
+let queries4 = [
+    ["APPEND", "!"],                 //| "" -> "!"
+    ["DELETE"]                       //| "!" -> "!"
+    ["MOVE", "0"],                   //| moves the cursor before the first symbol
+    ["DELETE"]                       //| "!" -> ""
+    ["DELETE"]                       //| "" -> ""
+]
+
+// returns: [ "!",
+//            "",
+//            "",
+//            "",
+//            "" ]
+let queries5 = [
+    ["APPEND", "Hello cruel world!"],  //| "" -> "Hello cruel world!"
+    ["SELECT", "5", "11"],             //| selects " cruel"
+    ["APPEND", ","]                    //| "Hello cruel world!" -> "Hello, world!"
+]
+
+// returns: [ "Hello cruel world!",
+//            "Hello cruel world!",
+//            "Hello, world!" ]
 function textEditor(arr) {
     let lastItem = '';
     let position = 0;
@@ -106,7 +129,11 @@ function textEditor(arr) {
 
     for (let i = 0; i < arr.length; i++) {
         let subArr = arr[i];
+        console.log('subArr', subArr)
+        console.log('sol', sol)
+        console.log('position', position)
         if (subArr[0] === 'APPEND') {
+            console.log('append', i);
             if (position === 0) {
                 lastItem = lastItem + subArr[1];
                 sol.push(lastItem);
@@ -116,20 +143,35 @@ function textEditor(arr) {
                 lastItem = lastItemArr.join('');
                 sol.push(lastItem);
             }
-        } else if (subArr[0] === 'MOVE') {
-            position = subArr[1];
+        }
+        if (subArr[0] === 'MOVE') {
+            console.log('move', i)
+            position += subArr[1];
             sol.push(lastItem);
-        } else if (subArr[0] === 'DELETE') {
+        }
+        if (subArr[0] === 'DELETE') {
+            console.log('delete', i)
             const lastItemArr = lastItem.split('');
             lastItemArr.splice(position, 1);
             lastItem = lastItemArr.join('');
+            console.log('lastItem', lastItem)
             sol.push(lastItem);
+        }
+        if (subArr[0] === 'SELECT') {
+            console.log('select', i)
+            sol.push(lastItem);
+            const lastItemArr = lastItem.split('');
+            lastItemArr.splice(subArr[1], subArr[2] - subArr[1]);
+            position = subArr[1];
+            lastItem = lastItemArr.join('');
         }
     }
 
     return sol;
 }
 
-console.log(textEditor(queries));
-console.log(textEditor(queries2));
-console.log(textEditor(queries3));
+// console.log(textEditor(queries));
+// console.log(textEditor(queries2));
+// console.log(textEditor(queries3));
+// console.log(textEditor(queries4));
+console.log(textEditor(queries5));
