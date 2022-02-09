@@ -63,5 +63,55 @@ function subArr(arr) {
     return count;
 }
 
-console.log(subArr([9, 8, 7, 6, 5])) // 15
-console.log(subArr([10, 10, 10])) // 3
+// console.log(subArr([9, 8, 7, 6, 5])) // 15
+// console.log(subArr([10, 10, 10])) // 3
+
+
+// Second Coding Challenge
+
+let queries = [
+    ["APPEND", "Hey"],               //| "" -> "Hey"
+    ["APPEND", " there"],            //| "Hey" -> "Hey there"
+    ["APPEND", "!"]                  //| "Hey there" -> "Hey there!"
+]
+// returns: [ "Hey",
+//            "Hey there",
+//            "Hey there!" ]
+
+let queries2 = [
+    ["APPEND", "Hey you"],           //| "" -> "Hey you"
+    ["MOVE", "3"],                   //| moves the cursor after the first "y"
+    ["APPEND", ","]                  //| "Hey you" -> "Hey, you"
+]
+
+// returns: [ "Hey you",
+//            "Hey you",
+//            "Hey, you" ]
+function textEditor(arr) {
+    let lastItem = '';
+    let position = 0;
+    let sol = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        let subArr = arr[i];
+        if (subArr[0] === 'APPEND') {
+            if (position === 0) {
+                lastItem = lastItem + subArr[1];
+                sol.push(lastItem);
+            } else {
+                const lastItemArr = lastItem.split('');
+                lastItemArr.splice(position, 0, subArr[1]);
+                lastItem = lastItemArr.join('');
+                sol.push(lastItem);
+            }
+        } else if (subArr[0] === 'MOVE') {
+            position = subArr[1];
+            sol.push(lastItem);
+        }
+    }
+
+    return sol;
+}
+
+console.log(textEditor(queries));
+console.log(textEditor(queries2));
