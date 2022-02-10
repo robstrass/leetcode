@@ -137,6 +137,15 @@ let queries6 = [
 //            "Hello, world!",
 //            "Hello, world, world!",
 //            "Hello, world, world, world!" ]
+let queries9 =
+[["APPEND","Hey, you!"],
+ ["MOVE","5"],
+ ["DELETE"],
+ ["DELETE"],
+ ["DELETE"],
+ ["DELETE"],
+ ["DELETE"],
+ ["APPEND","little world!"]]
 function textEditor(arr) {
     let lastItem = '';
     let beforeSelect = '';
@@ -162,7 +171,7 @@ function textEditor(arr) {
             console.log('move', i)
             position = +subArr[1];
             console.log('lastItemmmmm in move', lastItem)
-            lastItem = beforeSelect;
+            // lastItem = beforeSelect;
             sol.push(lastItem);
         }
         if (subArr[0] === 'DELETE') {
@@ -206,4 +215,5 @@ function textEditor(arr) {
 // console.log(textEditor(queries3));
 // console.log(textEditor(queries4));
 // console.log(textEditor(queries5));
-console.log(textEditor(queries6));
+// console.log(textEditor(queries6));
+console.log(textEditor(queries9));
