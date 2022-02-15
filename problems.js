@@ -141,3 +141,45 @@ var maxSubArray = function(nums) {
 
     return sum;
 };
+
+
+// isPalindrome
+const reverse = function(head) {
+    let prev = null;
+    let curr = head;
+    let next = null;
+
+    while (curr) {
+        next = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = next;
+    }
+
+    return prev;
+}
+
+var isPalindrome = function(head) {
+    let slow = head;
+    let fast = head;
+    let starter = head;
+    let length = 0;
+
+    while (fast && fast.next) {
+        fast = fast.next.next;
+        slow = slow.next;
+        length++
+    }
+
+    let mid = reverse(slow);
+
+    while (length) {
+        length--;
+        if (starter.val !== mid.val) return false;
+
+        starter = starter.next;
+        mid = mid.next;
+    }
+
+    return true;
+};
