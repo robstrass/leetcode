@@ -183,3 +183,18 @@ var isPalindrome = function(head) {
 
     return true;
 };
+
+
+// hasCycle
+var hasCycle = function(head) {
+    let slow = head;
+    let fast = head;
+
+    while (fast && fast.next) {
+        if (fast.next.next === slow) return true;
+        fast = fast.next.next;
+        slow = slow.next;
+    }
+
+    return false;
+};
