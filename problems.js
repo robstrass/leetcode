@@ -219,3 +219,19 @@ var removeElements = function(head, val) {
 
     return dummy.next
 };
+
+
+// delete duplicates linked list
+var deleteDuplicates = function(head) {
+    let curr = head;
+
+    while (curr && curr.next) {
+        if (curr.val === curr.next.val) {
+            curr.next = curr.next.next;
+        } else {
+            curr = curr.next
+        }
+    }
+
+    return head;
+};
