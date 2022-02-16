@@ -264,3 +264,25 @@ var addTwoNumbers = function(l1, l2) {
 
     return headNode.next;
 };
+
+// remove nth node from back
+var removeNthFromEnd = function(head, n) {
+    let dummy = new ListNode(null);
+    dummy.next = head;
+
+    let fast = dummy;
+    let slow = dummy;
+
+    for (let i = 0; i < n; i++) {
+        fast = fast.next;
+    }
+
+    while (fast.next) {
+        fast = fast.next;
+        slow = slow.next;
+    }
+
+    slow.next = slow.next.next;
+
+    return dummy.next;
+};
