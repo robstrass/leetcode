@@ -286,3 +286,26 @@ var removeNthFromEnd = function(head, n) {
 
     return dummy.next;
 };
+
+// linked lsit cycle 2
+var detectCycle = function(head) {
+    if (head === null || head.next === null) return null;
+    let fast = head;
+    let slow = head;
+
+    while(fast && fast.next) {
+        slow = slow.next;
+        fast = fast.next.next;
+        if (fast === slow) break;
+    }
+
+    if (fast === null || fast.next === null) return null;
+
+    slow = head;
+    while(slow !== fast) {
+        slow = slow.next;
+        fast = fast.next;
+    }
+
+    return slow;
+};
