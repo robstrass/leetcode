@@ -29,9 +29,9 @@ var gcdOfStrings = function (str1, str2) {
 
   const min = Math.min(str1.length, str2.length);
 
-  for (let i = min; i > 0; i--) {
-    if (str1.length % i === 0 && str2.length % i === 0) {
-      return str1.substring(0, i);
+  for (let l = min; l > 0; l--) {
+    if (str1.length % l === 0 && str2.length % l === 0) {
+      return str1.substring(0, l);
     }
   }
 };
