@@ -135,3 +135,23 @@ var reverseVowels = function (s) {
 
   return arr.join("");
 };
+
+// MEDIUM
+
+// 151. Reverse Words in a String
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var reverseWords = function (s) {
+  const res = [];
+  const arr = s.split(" ");
+
+  for (let i = arr.length - 1; i > -1; i--) {
+    if (arr[i] !== "") {
+      res.push(arr[i]);
+    }
+  }
+
+  return res.join(" ");
+};
