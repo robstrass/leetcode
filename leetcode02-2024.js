@@ -106,3 +106,32 @@ var reverseVowels = function (s) {
 
   return arr.join("");
 };
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var reverseVowels = function (s) {
+  const vowels = "aeiouAEIOU";
+  let l = 0;
+  let r = s.length - 1;
+  const arr = s.split("");
+
+  while (l < r) {
+    if (!vowels.includes(arr[l])) {
+      l++;
+    }
+    if (!vowels.includes(arr[r])) {
+      r--;
+    }
+
+    if (vowels.includes(arr[l]) && vowels.includes(arr[r])) {
+      const curr = arr[l];
+      arr[l] = arr[r];
+      arr[r] = curr;
+      l++;
+      r--;
+    }
+  }
+
+  return arr.join("");
+};
