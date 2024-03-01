@@ -78,3 +78,31 @@ var canPlaceFlowers = function (flowerbed, n) {
 
   return count >= n;
 };
+
+// 345. Reverse Vowels of a String
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var reverseVowels = function (s) {
+  const vowels = "aeiouAEIOU";
+  let l = 0;
+  let r = s.length - 1;
+  const arr = s.split("");
+
+  while (l < r) {
+    while (l < r && !vowels.includes(arr[l])) {
+      l++;
+    }
+
+    while (l < r && !vowels.includes(arr[r])) {
+      r--;
+    }
+
+    [arr[l], arr[r]] = [arr[r], arr[l]];
+    l++;
+    r--;
+  }
+
+  return arr.join("");
+};
