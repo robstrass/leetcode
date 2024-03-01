@@ -35,3 +35,24 @@ var gcdOfStrings = function (str1, str2) {
     }
   }
 };
+
+// 1431. Kids With the Greatest Number of Candies
+/**
+ * @param {number[]} candies
+ * @param {number} extraCandies
+ * @return {boolean[]}
+ */
+var kidsWithCandies = function (candies, extraCandies) {
+  let highest = Math.max(...candies);
+  const result = [];
+
+  for (let i = 0; i < candies.length; i++) {
+    if (candies[i] + extraCandies >= highest) {
+      result.push(true);
+    } else {
+      result.push(false);
+    }
+  }
+
+  return result;
+};
