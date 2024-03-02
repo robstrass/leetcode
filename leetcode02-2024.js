@@ -204,3 +204,31 @@ var increasingTriplet = function (nums) {
 
   return false;
 };
+
+// 443. String Compression
+/**
+ * @param {character[]} chars
+ * @return {number}
+ */
+var compress = function (chars) {
+  let j = 0;
+  let curr = chars[0];
+  let counter = 0;
+
+  for (let i = 0; i <= chars.length; i++) {
+    if (chars[i] === curr) {
+      counter++;
+    } else {
+      chars[j] = curr;
+      if (counter > 1) {
+        const s = counter.toString();
+        for (let k = 0; k < s.length; k++) chars[++j] = s[k];
+      }
+      j++;
+      curr = chars[i];
+      counter = 1;
+    }
+  }
+
+  return j;
+};
