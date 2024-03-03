@@ -48,7 +48,7 @@ function strArr(arr) {
 
 // contiguous subarrays
 function subArr(arr) {
-    if (arr === []) return 0;
+    // if (arr === []) return 0;
 
     let count = 0;
 
