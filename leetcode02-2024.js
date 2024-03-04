@@ -366,3 +366,25 @@ var maxOperations = function (nums, k) {
 
   return count;
 };
+
+// 1456. Maximum Number of Vowels in a Substring of Given Length
+/**
+ * @param {string} s
+ * @param {number} k
+ * @return {number}
+ */
+var maxVowels = function (s, k) {
+  const vowels = "aeiou";
+  let max = 0;
+  let count = 0;
+
+  for (let i = 0; i < s.length; i++) {
+    if (vowels.includes(s[i])) count++;
+
+    if (i >= k && vowels.includes(s[i - k])) count--;
+
+    max = Math.max(max, count);
+  }
+
+  return max;
+};
