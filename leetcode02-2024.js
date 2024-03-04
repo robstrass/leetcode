@@ -290,3 +290,30 @@ var compress = function (chars) {
 
   return j;
 };
+
+// 11. Container With Most Water
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+var maxArea = function (height) {
+  let l = 0;
+  let r = height.length - 1;
+  let res = -Infinity;
+
+  while (l < r) {
+    const min = Math.min(height[l], height[r]);
+    const distance = r - l;
+    if (min * distance > res) {
+      res = min * distance;
+    }
+
+    if (height[l] < height[r]) {
+      l++;
+    } else {
+      r--;
+    }
+  }
+
+  return res;
+};
