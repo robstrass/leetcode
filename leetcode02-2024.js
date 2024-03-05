@@ -388,3 +388,35 @@ var maxVowels = function (s, k) {
 
   return max;
 };
+
+// 1004. Max Consecutive Ones III
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var longestOnes = function (nums, k) {
+  let max = 0;
+  let count = 0;
+  let start = 0;
+  let kVal = k;
+
+  for (let i = 0; i < nums.length; i++) {
+    const curr = nums[i];
+    if (curr === 1) {
+      count++;
+    } else if (curr === 0 && kVal !== 0) {
+      count++;
+      kVal--;
+    } else {
+      max = Math.max(count, max);
+      i = start;
+      start++;
+      count = 0;
+      kVal = k;
+    }
+  }
+
+  max = Math.max(count, max);
+  return max;
+};
