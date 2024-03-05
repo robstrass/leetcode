@@ -390,33 +390,55 @@ var maxVowels = function (s, k) {
 };
 
 // 1004. Max Consecutive Ones III
+// optimized
 /**
  * @param {number[]} nums
  * @param {number} k
  * @return {number}
  */
 var longestOnes = function (nums, k) {
-  let max = 0;
-  let count = 0;
-  let start = 0;
-  let kVal = k;
+  let l = 0;
+  let r = 0;
 
-  for (let i = 0; i < nums.length; i++) {
-    const curr = nums[i];
-    if (curr === 1) {
-      count++;
-    } else if (curr === 0 && kVal !== 0) {
-      count++;
-      kVal--;
-    } else {
-      max = Math.max(count, max);
-      i = start;
-      start++;
-      count = 0;
-      kVal = k;
+  while (r < nums.length) {
+    if (nums[r] === 0) k--;
+    if (k < 0) {
+      if (nums[l] === 0) k++;
+      l++;
     }
+    r++;
   }
-
-  max = Math.max(count, max);
-  return max;
+  return r - l;
 };
+
+// essentially bruteforced
+// /**
+//  * @param {number[]} nums
+//  * @param {number} k
+//  * @return {number}
+//  */
+// var longestOnes = function (nums, k) {
+//   let max = 0;
+//   let count = 0;
+//   let start = 0;
+//   let kVal = k;
+
+//   for (let i = 0; i < nums.length; i++) {
+//     const curr = nums[i];
+//     if (curr === 1) {
+//       count++;
+//     } else if (curr === 0 && kVal !== 0) {
+//       count++;
+//       kVal--;
+//     } else {
+//       max = Math.max(count, max);
+//       i = start;
+//       start++;
+//       count = 0;
+//       kVal = k;
+//     }
+//   }
+
+//   max = Math.max(count, max);
+//   return max;
+// };
