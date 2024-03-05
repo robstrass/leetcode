@@ -411,34 +411,28 @@ var longestOnes = function (nums, k) {
   return r - l;
 };
 
-// essentially bruteforced
-// /**
-//  * @param {number[]} nums
-//  * @param {number} k
-//  * @return {number}
-//  */
-// var longestOnes = function (nums, k) {
-//   let max = 0;
-//   let count = 0;
-//   let start = 0;
-//   let kVal = k;
+// 1493. Longest Subarray of 1's After Deleting One Element
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var longestSubarray = function (nums) {
+  let left = 0;
+  let right = 0;
+  let k = 1;
+  let max = 0;
 
-//   for (let i = 0; i < nums.length; i++) {
-//     const curr = nums[i];
-//     if (curr === 1) {
-//       count++;
-//     } else if (curr === 0 && kVal !== 0) {
-//       count++;
-//       kVal--;
-//     } else {
-//       max = Math.max(count, max);
-//       i = start;
-//       start++;
-//       count = 0;
-//       kVal = k;
-//     }
-//   }
+  while (right < nums.length) {
+    if (nums[right] === 0) k--;
 
-//   max = Math.max(count, max);
-//   return max;
-// };
+    if (k < 0) {
+      if (nums[left] === 0) k++;
+      left++;
+    }
+
+    max = Math.max(max, right - left);
+    right++;
+  }
+
+  return max;
+};
