@@ -260,6 +260,34 @@ var findDifference = function (nums1, nums2) {
   return [ans1, ans2];
 };
 
+// 1207. Unique Number of Occurrences
+/**
+ * @param {number[]} arr
+ * @return {boolean}
+ */
+var uniqueOccurrences = function (arr) {
+  const obj = {};
+  const set = new Set();
+  for (let i = 0; i < arr.length; i++) {
+    const num = arr[i];
+    if (num in obj) {
+      obj[num]++;
+    } else {
+      obj[num] = 1;
+    }
+  }
+
+  for (const key in obj) {
+    if (set.has(obj[key])) {
+      return false;
+    } else {
+      set.add(obj[key]);
+    }
+  }
+
+  return true;
+};
+
 /*
 
 
