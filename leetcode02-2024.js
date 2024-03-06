@@ -202,6 +202,23 @@ var findMaxAverage = function (nums, k) {
   return max / k;
 };
 
+// 1732. Find the Highest Altitude
+/**
+ * @param {number[]} gain
+ * @return {number}
+ */
+var largestAltitude = function (gain) {
+  let alt = 0;
+  let max = 0;
+
+  for (let i = 0; i < gain.length; i++) {
+    alt += gain[i];
+    max = Math.max(max, alt);
+  }
+
+  return max;
+};
+
 /*
 
 
@@ -390,7 +407,6 @@ var maxVowels = function (s, k) {
 };
 
 // 1004. Max Consecutive Ones III
-// optimized
 /**
  * @param {number[]} nums
  * @param {number} k
