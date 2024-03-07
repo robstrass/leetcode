@@ -558,3 +558,30 @@ var closeStrings = function (word1, word2) {
 
   return true;
 };
+
+// 2352. Equal Row and Column Pairs
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+var equalPairs = function (grid) {
+  const hash = {};
+  let count = 0;
+
+  for (let r = 0; r < grid.length; r++) {
+    const key = JSON.stringify(grid[r]);
+    hash[key] = (hash[key] || 0) + 1;
+  }
+
+  for (let r = 0; r < grid.length; r++) {
+    const col = [];
+    for (let c = 0; c < grid[r].length; c++) {
+      col.push(grid[c][r]);
+    }
+
+    const key = JSON.stringify(col);
+    if (key in hash) count += hash[key];
+  }
+
+  return count;
+};
