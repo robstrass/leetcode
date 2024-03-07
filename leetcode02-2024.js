@@ -521,3 +521,40 @@ var longestSubarray = function (nums) {
 
   return max;
 };
+
+// 1657. Determine if Two Strings Are Close
+/**
+ * @param {string} word1
+ * @param {string} word2
+ * @return {boolean}
+ */
+var closeStrings = function (word1, word2) {
+  if (word1.length !== word2.length) return false;
+  if (word1 === word2) return true;
+
+  const first = new Array(26).fill(0);
+  const second = new Array(26).fill(0);
+
+  for (let i = 0; i < word1.length; i++) {
+    first[word1.charCodeAt(i) - "a".charCodeAt(0)]++;
+    second[word2.charCodeAt(i) - "a".charCodeAt(0)]++;
+  }
+
+  for (let i = 0; i < 26; i++) {
+    if (
+      (first[i] === 0 && second[i] !== 0) ||
+      (first[i] !== 0 && second[i] === 0)
+    ) {
+      return false;
+    }
+  }
+
+  first.sort((a, b) => a - b);
+  second.sort((a, b) => a - b);
+
+  for (let i = 0; i < 26; i++) {
+    if (first[i] !== second[i]) return false;
+  }
+
+  return true;
+};
