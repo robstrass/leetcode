@@ -631,3 +631,38 @@ var asteroidCollision = function (asteroids) {
 
   return stack;
 };
+
+// 394. Decode String
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var decodeString = function(s) {
+  const stack = [];
+  let str = "";
+  let num = 0;
+
+  for (let i = 0; i < s.length; i++) {
+      if (s[i] === "[") {
+          stack.push(num);
+          stack.push(str);
+          str = '';
+          num = 0;
+      } else if (s[i] === "]") {
+          let prevStr = stack.pop();
+          let prevNum = stack.pop();
+          let currStr = str;
+          str = prevStr;
+          while (prevNum > 0) {
+              str += currStr;
+              prevNum--;
+          }
+      } else if (s[i] >= "0" && s[i] <= "9") {
+          num += s[i];
+      } else {
+          str += s[i]
+      }
+  }
+
+  return str;
+};
