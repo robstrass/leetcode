@@ -603,3 +603,31 @@ var removeStars = function (s) {
 
   return stack.join("");
 };
+
+// 735. Asteroid Collision
+/**
+ * @param {number[]} asteroids
+ * @return {number[]}
+ */
+var asteroidCollision = function (asteroids) {
+  const stack = [];
+  for (let i = 0; i < asteroids.length; i++) {
+    const curr = asteroids[i];
+    if ((stack.length < 1 || stack[stack.length - 1] < 0) && curr < 0) {
+      stack.push(curr);
+    } else if (curr > 0) {
+      stack.push(curr);
+    } else {
+      const pop = stack.pop();
+      if (Math.abs(curr) < Math.abs(pop)) {
+        stack.push(pop);
+      } else if (Math.abs(curr) > Math.abs(pop)) {
+        i--;
+      } else {
+        continue;
+      }
+    }
+  }
+
+  return stack;
+};
