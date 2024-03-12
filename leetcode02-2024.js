@@ -691,3 +691,34 @@ var decodeString = function (s) {
 
   return str;
 };
+
+// 649. Dota2 Senate
+/**
+ * @param {string} senate
+ * @return {string}
+ */
+var predictPartyVictory = function (senate) {
+  const r = [];
+  const d = [];
+  const n = senate.length;
+
+  for (let i = 0; i < n; i++) {
+    if (senate[i] === "R") {
+      r.push(i + n);
+    } else {
+      d.push(i + n);
+    }
+  }
+
+  while (r.length && d.length) {
+    if (r[0] < d[0]) {
+      r.push(r[0] + n);
+    } else {
+      d.push(d[0] + n);
+    }
+    r.shift();
+    d.shift();
+  }
+
+  return r.length ? "Radiant" : "Dire";
+};
