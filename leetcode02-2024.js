@@ -736,6 +736,7 @@ var predictPartyVictory = function (senate) {
  * @return {ListNode}
  */
 var deleteMiddle = function (head) {
+  if (head === null) return null;
   let slow = head;
   let fast = head;
   let prev;
@@ -746,6 +747,7 @@ var deleteMiddle = function (head) {
     fast = fast.next.next;
   }
 
+  if (!prev) return null;
   prev.next = slow.next;
   return head;
 };
