@@ -817,3 +817,51 @@ var oddEvenList = function (head) {
 
   return odd.next;
 };
+
+// 2130. Maximum Twin Sum of a Linked List
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {number}
+ */
+var pairSum = function (head) {
+  let max = 0;
+  let slow = head;
+  let fast = head;
+  let prev = null;
+
+  while (fast !== null && fast.next !== null) {
+    prev = slow;
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+
+  prev.next = null;
+  let curr = slow;
+  let temp = null;
+
+  while (curr !== null) {
+    let next = curr.next;
+    curr.next = temp;
+    temp = curr;
+    curr = next;
+  }
+
+  let curr1 = head;
+
+  while (curr1 !== null) {
+    const sum = curr1.val + temp.val;
+    max = Math.max(max, sum);
+
+    curr1 = curr1.next;
+    temp = temp.next;
+  }
+
+  return max;
+};
