@@ -339,6 +339,22 @@ var reverseList = function (head) {
   return prev;
 };
 
+// 1137. N-th Tribonacci Number
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var tribonacci = function (n, hash = {}) {
+  if (n === 0) return 0;
+  if (n < 3) return 1;
+
+  if (hash[n] !== undefined) return hash[n];
+
+  hash[n] =
+    tribonacci(n - 1, hash) + tribonacci(n - 2, hash) + tribonacci(n - 3, hash);
+  return hash[n];
+};
+
 /*
 
 
