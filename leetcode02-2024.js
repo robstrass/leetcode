@@ -360,12 +360,30 @@ var tribonacci = function (n, hash = {}) {
  * @param {number[]} cost
  * @return {number}
  */
-var minCostClimbingStairs = function(cost) {
+var minCostClimbingStairs = function (cost) {
   for (let i = cost.length - 3; i >= 0; i--) {
-      cost[i] += Math.min(cost[i + 1], cost[i + 2]);
+    cost[i] += Math.min(cost[i + 1], cost[i + 2]);
   }
 
   return Math.min(cost[0], cost[1]);
+};
+
+// 198. House Robber
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var rob = function (nums) {
+  let currMax = 0;
+  let prevMax = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    let temp = currMax;
+    currMax = Math.max(prevMax + nums[i], currMax);
+    prevMax = temp;
+  }
+
+  return currMax;
 };
 
 /*
