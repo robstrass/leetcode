@@ -386,6 +386,26 @@ var rob = function (nums) {
   return currMax;
 };
 
+// 790. Domino and Tromino Tiling
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var numTilings = function (n) {
+  const memo = {};
+  const mod = 10 ** 9 + 7;
+
+  memo[0] = 1;
+  memo[1] = 1;
+  memo[2] = 2;
+
+  for (let i = 3; i <= n; i++) {
+    memo[i] = 2 * memo[i - 1] + memo[i - 3];
+  }
+
+  return memo[n] % mod;
+};
+
 /*
 
 
