@@ -392,7 +392,7 @@ var rob = function (nums) {
  * @return {number}
  */
 var numTilings = function (n) {
-  const memo = {};
+  const memo = new Array(n + 1).fill(0);
   const mod = 10 ** 9 + 7;
 
   memo[0] = 1;
@@ -400,10 +400,10 @@ var numTilings = function (n) {
   memo[2] = 2;
 
   for (let i = 3; i <= n; i++) {
-    memo[i] = 2 * memo[i - 1] + memo[i - 3];
+    memo[i] = (2 * memo[i - 1] + memo[i - 3]) % mod;
   }
 
-  return memo[n] % mod;
+  return memo[n];
 };
 
 /*
