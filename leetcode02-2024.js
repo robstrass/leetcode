@@ -368,44 +368,6 @@ var minCostClimbingStairs = function (cost) {
   return Math.min(cost[0], cost[1]);
 };
 
-// 198. House Robber
-/**
- * @param {number[]} nums
- * @return {number}
- */
-var rob = function (nums) {
-  let currMax = 0;
-  let prevMax = 0;
-
-  for (let i = 0; i < nums.length; i++) {
-    let temp = currMax;
-    currMax = Math.max(prevMax + nums[i], currMax);
-    prevMax = temp;
-  }
-
-  return currMax;
-};
-
-// 790. Domino and Tromino Tiling
-/**
- * @param {number} n
- * @return {number}
- */
-var numTilings = function (n) {
-  const memo = new Array(n + 1).fill(0);
-  const mod = 10 ** 9 + 7;
-
-  memo[0] = 1;
-  memo[1] = 1;
-  memo[2] = 2;
-
-  for (let i = 3; i <= n; i++) {
-    memo[i] = (2 * memo[i - 1] + memo[i - 3]) % mod;
-  }
-
-  return memo[n];
-};
-
 /*
 
 
@@ -931,4 +893,42 @@ var pairSum = function (head) {
   }
 
   return max;
+};
+
+// 198. House Robber
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var rob = function (nums) {
+  let currMax = 0;
+  let prevMax = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    let temp = currMax;
+    currMax = Math.max(prevMax + nums[i], currMax);
+    prevMax = temp;
+  }
+
+  return currMax;
+};
+
+// 790. Domino and Tromino Tiling
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var numTilings = function (n) {
+  const memo = new Array(n + 1).fill(0);
+  const mod = 10 ** 9 + 7;
+
+  memo[0] = 1;
+  memo[1] = 1;
+  memo[2] = 2;
+
+  for (let i = 3; i <= n; i++) {
+    memo[i] = (2 * memo[i - 1] + memo[i - 3]) % mod;
+  }
+
+  return memo[n];
 };
