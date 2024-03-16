@@ -932,3 +932,52 @@ var numTilings = function (n) {
 
   return memo[n];
 };
+
+// 62. Unique Paths
+/**
+ * @param {number} m
+ * @param {number} n
+ * @return {number}
+ */
+var uniquePaths = function (m, n) {
+  // m x n grid
+  // robot at grid[0][0]
+  // can only move down and right
+  // return total unique paths to the end, grid[m - 1][n - 1]
+
+  // (m - 1) + (n - 1)
+  // 3 x 2 = 3
+  // 3 x 7 = 27
+  // 3 x 3 x 3
+
+  // grid[i][j] = grid[m - 1][n] + grid[m][n - 1];
+
+  // instantiate a grid
+  // m sub grids eahc with n length
+  // first subgrid, m[0] = 0, then fill with 1
+  //  rest are m[0] = 1, then fill with 0;
+  // push each subgrid into grid
+
+  if (m === 1 || n === 1) return 1;
+  const grid = [];
+
+  const subArr = new Array(n);
+  subArr.fill(1);
+  subArr[0] = 0;
+  grid.push(subArr);
+
+  for (let i = 1; i <= m - 1; i++) {
+    const subArr = new Array(n);
+    subArr.fill(0);
+    subArr[0] = 1;
+    grid.push(subArr);
+  }
+
+  for (let i = 1; i < grid.length; i++) {
+    for (let j = 1; j < grid[0].length; j++) {
+      grid[i][j] += grid[i - 1][j] + grid[i][j - 1];
+    }
+  }
+
+  return grid[m - 1][n - 1];
+};
