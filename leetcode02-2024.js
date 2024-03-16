@@ -988,28 +988,54 @@ var uniquePaths = function (m, n) {
  * @param {string} text2
  * @return {number}
  */
-var longestCommonSubsequence = function(text1, text2) {
+var longestCommonSubsequence = function (text1, text2) {
   // create 2D array using lengths + 1 for each text
   // cell dp[i][j] represents length of common sequence of substrings
-      // text[0...i-1] and text2[0...j-1]
+  // text[0...i-1] and text2[0...j-1]
   // we fill in dp array from bottom up using recurrence relation:
-      // if chars at i-1 and j-1 match, dp[i][j] = dp[i-1][j-1] + 1
-      // else dp[i][j] = max dp[i-1][j], d[[i][j-1]]
+  // if chars at i-1 and j-1 match, dp[i][j] = dp[i-1][j-1] + 1
+  // else dp[i][j] = max dp[i-1][j], d[[i][j-1]]
   // the bottom right cell dp[length1][length2] is the longest length
   const length1 = text1.length;
   const length2 = text2.length;
-  const dp = new Array(length1 + 1).fill(0).map(() =>
-                          new Array(length2 + 1).fill(0));
+  const dp = new Array(length1 + 1)
+    .fill(0)
+    .map(() => new Array(length2 + 1).fill(0));
 
   for (let i = 1; i <= length1; i++) {
-      for (let j = 1; j <= length2; j++) {
-          if (text1[i - 1] === text2[j - 1]) {
-              dp[i][j] = dp[i-1][j-1] + 1;
-          } else {
-              dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1])
-          }
+    for (let j = 1; j <= length2; j++) {
+      if (text1[i - 1] === text2[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1] + 1;
+      } else {
+        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
       }
+    }
   }
 
   return dp[length1][length2];
+};
+
+// 714. Best Time to Buy and Sell Stock with Transaction Fee
+/**
+ * @param {number[]} prices
+ * @param {number} fee
+ * @return {number}
+ */
+var maxProfit = function (prices, fee) {
+  let totalProfit = 0;
+  let lowPrice = prices[0];
+
+  for (let i = 1; i < prices.length; i++) {
+    const price = prices[i];
+    if (price < lowPrice) lowPrice = price;
+    else {
+      const profit = price - lowPrice - fee;
+      if (profit > 0) {
+        totalProfit += profit;
+        lowPrice = price - fee;
+      }
+    }
+  }
+
+  return totalProfit;
 };
