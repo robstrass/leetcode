@@ -1039,3 +1039,51 @@ var maxProfit = function (prices, fee) {
 
   return totalProfit;
 };
+
+// 72. Edit Distance
+/**
+ * @param {string} word1
+ * @param {string} word2
+ * @return {number}
+ */
+var minDistance = function (word1, word2) {
+  /*  create 2d arr size (m+1) x (n+1)
+      each element dp[i][j] represents min edit distance between
+          first i chars of word1 & first j chars of word2
+  initialize first row of dp from 0 - n and first column from 0 - m
+  iterate over each char in word1 & word2
+      if i = 0 dp[i][j] = j, min edit distance between empty & string of
+          length j is j
+      if j = 0 dp[i][j] = i, min edit distance between empty & string i of
+          length i is i
+      if chars i-1 and j-1 of word1 & word2 are equal, dp[i][j] =
+          dp[i-1][j-1], no edit is needed
+      if chars i-1 & j-1 of word1 & word2 !=, dp[i][j] =
+          1 + min(dp[i-1][j-1], dp[i][j-1], dp[i-1][j])
+          where dp[i-1][j-1] is min edit distance after replacing
+              char at i-1 with j-1 in word2,
+          dp[i][j-1] is min edit distance after inserting char at j-1 of word2
+              into word1,
+          dp[i-1][j] is min edit distance after deleting char at i-1 of word1
+  return value of dp[m][n], which represents min edit distance between entire
+      string*/
+
+  const m = word1.length;
+  const n = word2.length;
+
+  const dp = new Array(m + 1).fill(0).map(() => new Array(n + 1).fill(0));
+
+  for (let i = 0; i <= m; i++) {
+    for (let j = 0; j <= n; j++) {
+      if (i === 0) dp[i][j] = j;
+      else if (j === 0) dp[i][j] = i;
+      else if (word1[i - 1] === word2[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1];
+      } else if (word1[i - 1] !== word2[j - 1]) {
+        dp[i][j] = 1 + Math.min(dp[i - 1][j - 1], dp[i][j - 1], dp[i - 1][j]);
+      }
+    }
+  }
+
+  return dp[m][n];
+};
