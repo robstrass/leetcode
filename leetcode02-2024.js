@@ -419,6 +419,42 @@ var leafSimilar = function (root1, root2) {
   return leaves1.toString() === leaves2.toString();
 };
 
+// 20. Valid Parenthesis
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function (s) {
+  if (s.length % 2 !== 0) return false;
+
+  const validPairs = {
+    "(": ")",
+    "{": "}",
+    "[": "]",
+  };
+
+  const stack = [];
+
+  for (let i = 0; i < s.length; i++) {
+    const char = s[i];
+
+    if (char in validPairs) {
+      stack.push(char);
+    } else {
+      const check = stack.pop();
+      if (validPairs[check] !== char) {
+        return false;
+      }
+    }
+  }
+
+  if (stack.length > 0) {
+    return false;
+  }
+
+  return true;
+};
+
 /*
 
 
